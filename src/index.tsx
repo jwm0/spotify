@@ -1,13 +1,18 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { ThemeProvider } from 'styled-components';
+import 'sanitize.css';
 
-// TODO: Change to absolute
-import Main from '@components/pages/Main';
+import App from '@components/templates/App';
+import theme from '@constants/theme';
 
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(
-  <Main />,
-  document.getElementById('root') as HTMLElement
+const app = (
+  <ThemeProvider theme={theme}>
+    <App />
+  </ThemeProvider>
 );
+
+ReactDOM.render(app, document.getElementById('root') as HTMLElement);
 registerServiceWorker();

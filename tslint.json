@@ -2,7 +2,6 @@
   "extends": [
     "tslint-react",
     "tslint-config-prettier"
-    // "tslint-airbnb"
   ],
   "linterOptions": {
     "exclude": [
@@ -12,10 +11,10 @@
     ]
   },
   "rules": {
-    // "import-name": false,
-    // "variable-name": false,
-    // "jsx-boolean-value": false,
-    // "jsx-no-multiline-js": false,
-    // "object-literal-sort-keys": true
+    "import-name": false,
+    "variable-name": false,
+    "jsx-boolean-value": false,
+    "jsx-no-multiline-js": false,
+    "object-literal-sort-keys": true
   }
 }
