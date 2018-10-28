@@ -6,8 +6,9 @@ import Navigation from '@components/organisms/Navigation';
 import Content from '@components/templates/Content';
 import Playbar from '@components/organisms/Playbar';
 
-// dynamic
+// routes
 import Main from '@components/pages/Main';
+import Search from '@components/pages/Search';
 
 import { Wrapper } from './styles';
 
@@ -18,6 +19,7 @@ const AppRouter = () => (
       <Playbar />
       <Content>
         <Route path="/browse" exact component={Main} />
+        <Route path="/search" component={Search} />
       </Content>
     </Wrapper>
   </Router>
