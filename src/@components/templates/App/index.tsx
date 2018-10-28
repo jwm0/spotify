@@ -1,9 +1,13 @@
 import * as React from "react";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Main from '@components/pages/Main';
+// static
 import Navigation from '@components/organisms/Navigation';
+import Content from '@components/templates/Content';
 import Playbar from '@components/organisms/Playbar';
+
+// dynamic
+import Main from '@components/pages/Main';
 
 import { Wrapper } from './styles';
 
@@ -12,7 +16,9 @@ const AppRouter = () => (
     <Wrapper>
       <Navigation />
       <Playbar />
-      <Route path="/" exact component={Main} />
+      <Content>
+        <Route path="/browse" exact component={Main} />
+      </Content>
     </Wrapper>
   </Router>
 );

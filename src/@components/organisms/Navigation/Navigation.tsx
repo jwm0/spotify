@@ -1,12 +1,16 @@
 import * as React from 'react';
 
-import { Wrapper } from './styles';
+import { Wrapper, Menu, StyledLink } from './styles';
 
 class Navigation extends React.Component {
   render() {
     return (
       <Wrapper>
-        Nav
+        <Menu>
+          <StyledLink to="/search">Search</StyledLink>
+          <StyledLink to="/browse">Home</StyledLink>
+          <StyledLink to="/library">My Music</StyledLink>
+        </Menu>
       </Wrapper>
     );
   }
