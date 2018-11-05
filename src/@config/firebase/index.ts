@@ -1,5 +1,5 @@
 const config = {
-  apiKey: "AIzaSyAxikCgViMe5mtwr7Ualnc8Xttag8VPqAQ",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "ytspotify-1511916712097.firebaseapp.com",
   databaseURL: "https://ytspotify-1511916712097.firebaseio.com",
   messagingSenderId: "15300878718",

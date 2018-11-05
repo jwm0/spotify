@@ -8,4 +8,6 @@ export interface ApplicationState {
 
 export default combineReducers<ApplicationState>({
   // combine reducers here
+  // queue: queueReducer
+  // search: searchReducer
 });
