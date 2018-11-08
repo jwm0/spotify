@@ -1,13 +1,12 @@
 import { combineReducers } from 'redux';
 
-// import reducers
+import searchReducer from './Search/reducer';
 
 export interface ApplicationState {
-  // todo
+  search: any,
 }
 
 export default combineReducers<ApplicationState>({
-  // combine reducers here
   // queue: queueReducer
-  // search: searchReducer
+  search: searchReducer,
 });
