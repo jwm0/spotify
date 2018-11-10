@@ -1,5 +1,5 @@
 import { STATUS } from '../types';
-import { SEARCH } from './actions';
+import { SEARCH, SEARCH_TYPE } from './actions';
 
 const InitialState = {
   data: {},
@@ -13,19 +13,27 @@ const InitialState = {
 
 const SearchReducer = (state = InitialState, action) => {
   switch (action.type) {
-    // INFO: Get reservation
     case SEARCH.STARTED:
       return {
         ...state,
         query: action.query,
         status: STATUS.STARTED,
       };
-    case SEARCH.SUCCEED:
+    case SEARCH.SUCCEED: {
+      const { songs, artist, playlist } = action.payload.data;
+
       return {
         ...state,
-        data: action.payload.data,
+        data: { songs, artist, playlist },
         status: STATUS.SUCCEED,
       };
+    }
+    case SEARCH_TYPE.SUCCEED:
+      return {
+        ...state,
+        data: action.payload.data.items,
+        status: STATUS.SUCCEED,
+      }
     case SEARCH.FAILED:
       return {
         ...state,

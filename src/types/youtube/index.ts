@@ -3,3 +3,7 @@ export enum Type {
   PLAYLIST = 'playlist',
   VIDEO = 'video',
 };
+
+export enum Category {
+  MUSIC = '10',
+};

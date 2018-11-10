@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { requestSearch } from '@store/Search/actions';
+import { requestSearch, requestSearchByType } from '@store/Search/actions';
 import { Type } from 'types/youtube';
 
 import { Wrapper, StyledInput } from './styles';
@@ -49,7 +49,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  search: (query: string, results?: number, type?: Type) => dispatch(requestSearch(query, results, type)),
+  search: (query: string) => dispatch(requestSearch(query)),
+  searchByType: (query: string, results?: number, type?: Type) => dispatch(requestSearchByType(query, results, type)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Searchbar);
