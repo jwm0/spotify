@@ -11,7 +11,7 @@ export const Header = styled.div`
   justify-content: space-between;
   width: 100%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-  margin-bottom: 20px;
+  margin: 20px 0;
 `;
 
 export const Title = styled.span`

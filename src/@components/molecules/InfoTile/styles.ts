@@ -15,12 +15,13 @@ export const Description = styled.div`
 
 export const Primary = styled.span`
   display: block;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
 `;
 
 export const Secondary = styled.span`
   display: block;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 400;
+  margin-top: 5px;
 `;

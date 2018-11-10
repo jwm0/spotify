@@ -14,6 +14,7 @@ export const Box = styled.div<any>`
   position: relative;
   width: ${props => props.size ? props.size : 200}px;
   height: ${props => props.size ? props.size : 200}px;
+  border-radius: ${props => props.isRound && '50%'};
 `;
 
 export const PlayButton = styled.button`

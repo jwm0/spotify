@@ -1,4 +1,5 @@
 import { all, takeLatest, put, call } from 'redux-saga/effects';
+import { get } from 'lodash';
 
 import { Type, Category } from 'types/youtube';
 import { Search } from '@services/youtube';
@@ -26,21 +27,34 @@ function* fetchSearchData(action) {
     const { data: songData } = yield call(Search.list, action.query, 6, Type.VIDEO, Category.MUSIC);
     const { data: artistData } = yield call(Search.list, action.query, 4, Type.CHANNEL);
     const { data: playlistData } = yield call(Search.list, action.query, 4, Type.PLAYLIST);
+
     const songs = songData.items.map((song) => {
       const { artistName, title } = getArtist(song.snippet.title);
       return {
         artistName,
-        thumbnail: song.snippet.thumbnails.default,
+        id: song.id.videoId,
+        thumbnail: get(song.snippet, 'thumbnails.default', {}),
         title,
       };
     });
-    console.log('artist', artistData);
-    console.log('play', playlistData)
-    const artist = {};
-    const playlist = {};
+    const artists = artistData.items.map((artist) => {
+      return {
+        id: artist.id.channelId,
+        name: artist.snippet.channelTitle,
+        thumbnail: get(artist.snippet, 'thumbnails.default', {}),
+      };
+    });
+    const playlists = playlistData.items.map((playlist) => {
+      return {
+        creatorName: playlist.snippet.channelTitle,
+        id: playlist.id.playlistId,
+        thumbnail: get(playlist.snippet, 'thumbnails.default', {}),
+        title: playlist.snippet.title,
+      };
+    });
 
     yield put({
-      payload: { data: { songs, artist, playlist } },
+      payload: { data: { songs, artists, playlists } },
       type: SEARCH.SUCCEED,
     });
   } catch (error) {

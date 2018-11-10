@@ -15,6 +15,7 @@ import { Wrapper } from './styles';
 const AppRouter = () => (
   <Router>
     <Wrapper>
+      {/* <Background /> */}
       <Navigation />
       <Playbar />
       <Content>

@@ -8,4 +8,5 @@ export const Outer = styled.div`
 
 export const Inner = styled.div`
   padding: 20px;
+  z-index: 10;
 `;

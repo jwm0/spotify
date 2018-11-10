@@ -20,11 +20,11 @@ const SearchReducer = (state = InitialState, action) => {
         status: STATUS.STARTED,
       };
     case SEARCH.SUCCEED: {
-      const { songs, artist, playlist } = action.payload.data;
+      const { songs, artists, playlists } = action.payload.data;
 
       return {
         ...state,
-        data: { songs, artist, playlist },
+        data: { songs, artists, playlists },
         status: STATUS.SUCCEED,
       };
     }
