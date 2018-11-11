@@ -9,13 +9,11 @@ import { Props } from './types';
 
 class SongResults extends React.PureComponent<Props> {
   componentDidMount() {
-    const { query, searchSongs } = this.props;
+    const { query } = this.props.match.params;
 
-    if (query) {
-      searchSongs(query);
-    } else {
-      // search songs by url params
-    }
+    if (this.props.searchSongs) {
+      this.props.searchSongs(query);
+    };
   }
 
   render() {

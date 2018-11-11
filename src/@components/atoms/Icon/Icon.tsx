@@ -5,7 +5,10 @@ import { Props } from './types';
 
 const Icon: React.SFC<Props> = (props) => {
   return (
-    <Wrapper src={props.image} />
+    <Wrapper
+      src={props.image}
+      size={props.size}
+    />
   );
 };
 

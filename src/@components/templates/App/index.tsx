@@ -22,7 +22,7 @@ const AppRouter = () => (
       <Content>
         <Route path="/browse" exact component={Main} />
         <Route path="/search" exact component={Search} />
-        <Route path="/search/songs" component={SongResults} />
+        <Route path="/search/songs/:query" component={SongResults} />
       </Content>
     </Wrapper>
   </Router>
