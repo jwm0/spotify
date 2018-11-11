@@ -12,15 +12,16 @@ export const Box = styled.div<any>`
   background-position: center;
   background-size: cover;
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: ${props => props.size ? props.size : 200}px;
+  height: ${props => props.size ? props.size : 200}px;
+  border-radius: ${props => props.isRound && '50%'};
 `;
 
 export const PlayButton = styled.button`
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
 `;
 
 export const Caption = styled.span`

@@ -8,3 +8,11 @@ export const Wrapper = styled.div`
   bottom: 0;
   z-index: 101;
 `;
+
+export const Player = styled.div`
+  position: fixed;
+  top: -60px;
+  height: calc(100vh - 50px);
+  width: 100%;
+  display: none;
+`;

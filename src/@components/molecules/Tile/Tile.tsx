@@ -5,14 +5,18 @@ import { Wrapper, Box, PlayButton, Caption } from './styles';
 
 class Tile extends React.PureComponent<Props> {
   render() {
-    const { background, name } = this.props;
+    const { background, name, size, isRound } = this.props;
 
     return (
       <Wrapper>
-        <Box background={background}>
+        <Box
+          background={background}
+          size={size}
+          isRound={isRound}
+        >
           <PlayButton />
         </Box>
-        <Caption>{name}</Caption>
+        {name && <Caption>{name}</Caption>}
       </Wrapper>
     )
   }

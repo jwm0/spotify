@@ -9,17 +9,20 @@ import Playbar from '@components/organisms/Playbar';
 // routes
 import Main from '@components/pages/Main';
 import Search from '@components/pages/Search';
+import SongResults from '@components/pages/SongResults';
 
 import { Wrapper } from './styles';
 
 const AppRouter = () => (
   <Router>
     <Wrapper>
+      {/* <Background /> */}
       <Navigation />
       <Playbar />
       <Content>
         <Route path="/browse" exact component={Main} />
-        <Route path="/search" component={Search} />
+        <Route path="/search" exact component={Search} />
+        <Route path="/search/songs/:query" component={SongResults} />
       </Content>
     </Wrapper>
   </Router>
