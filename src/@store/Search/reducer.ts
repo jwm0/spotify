@@ -31,7 +31,10 @@ const SearchReducer = (state = InitialState, action) => {
     case SEARCH_TYPE.SUCCEED:
       return {
         ...state,
-        data: action.payload.data.items,
+        data: {
+          ...state.data,
+          ids: action.payload.ids,
+        },
         status: STATUS.SUCCEED,
       }
     case SEARCH.FAILED:

@@ -1,6 +1,7 @@
 import { all, takeLatest, put, call } from 'redux-saga/effects';
 import { get } from 'lodash';
 
+import { Details } from '@services/youtube';
 import { getArtist } from '@utils/youtube';
 
 import { DETAILS } from './actions';
@@ -9,14 +10,17 @@ function* fetchSongDetails(action) {
   try {
     yield put({ type: DETAILS.STARTED });
 
-    const { data: songData } = yield call();
+    const { data } = yield call(Details.list, action.ids);
 
-    const details = songData.items.map((song) => {
+    const details = data.items.map((song) => {
       const { artistName, title } = getArtist(song.snippet.title);
 
       return {
         artistName,
-        id: song.id.videoId,
+        duration: song.contentDetails.duration,
+        id: song.id,
+        playCount: song.statistics.viewCount,
+        quality: song.contentDetails.definition,
         thumbnail: get(song.snippet, 'thumbnails.default', {}),
         title,
       };

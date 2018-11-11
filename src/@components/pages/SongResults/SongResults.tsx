@@ -1,17 +1,40 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+import { requestSearchByType } from '@store/Search/actions';
 import SongsList from '@components/organisms/SongsList';
 
-class SongResults extends React.PureComponent {
+import { Props } from './types';
+
+class SongResults extends React.PureComponent<Props> {
+  componentDidMount() {
+    const { query, searchSongs } = this.props;
+
+    if (query) {
+      searchSongs(query);
+    } else {
+      // search songs by url params
+    }
+  }
+
   render() {
     return (
       <div>
         <Link to="/search">GO BACK</Link>
-        <SongsList />
+        <SongsList songIds={this.props.ids} />
       </div>
     )
   }
 }
 
-export default SongResults;
+const mapStateToProps = state => ({
+  ids: state.search.data.ids,
+  query: state.search.query,
+});
+
+const mapDispatchToProps = dispatch => ({
+  searchSongs: (query: string) => dispatch(requestSearchByType(query)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SongResults);

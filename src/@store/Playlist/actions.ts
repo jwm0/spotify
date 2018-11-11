@@ -6,7 +6,7 @@ export enum DETAILS {
   FINISHED = 'SONG_DETAILS_FINISHED',
 };
 
-export const requestSongDetails = (ids: string[]) => ({
+export const requestSongDetails = (ids: string | string[]) => ({
   ids,
   type: DETAILS.REQUESTED,
 });

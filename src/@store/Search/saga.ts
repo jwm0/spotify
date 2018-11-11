@@ -55,21 +55,24 @@ function* fetchSearchData(action) {
 
 function* fetchSearchDataByType(action) {
   try {
-    yield put({ type: SEARCH.STARTED, query: action.query });
+    yield put({ type: SEARCH_TYPE.STARTED, query: action.query });
 
     const { data } = yield call(Search.list, action.query, action.results, action.queryType);
 
+    // INFO: Change id if type != videos
+    const ids = data.items.map((song) => song.id.videoId);
+
     yield put({
-      payload: { data: data.items },
-      type: SEARCH.SUCCEED,
+      payload: { ids },
+      type: SEARCH_TYPE.SUCCEED,
     });
   } catch (error) {
     yield put({
       payload: { error },
-      type: SEARCH.FAILED,
+      type: SEARCH_TYPE.FAILED,
     });
   }
-  yield put({ type: SEARCH.FINISHED });
+  yield put({ type: SEARCH_TYPE.FINISHED });
 }
 
 

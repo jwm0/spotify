@@ -21,9 +21,9 @@ export const requestSearch = (query: string) => ({
   type: SEARCH.REQUESTED,
 });
 
-export const requestSearchByType = (query: string, results: number = 15, queryType?: Type) => ({
+export const requestSearchByType = (query: string, results: number = 15, queryType: Type = Type.VIDEO) => ({
   query,
   queryType,
   results,
-  type: SEARCH.REQUESTED,
+  type: SEARCH_TYPE.REQUESTED,
 });

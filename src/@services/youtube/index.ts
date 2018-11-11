@@ -10,3 +10,14 @@ export const Search = {
     videoCategoryId: category,
   } }),
 };
+
+export const Details = {
+  list: (ids: string | string[]) => {
+    const formattedIds = Array.isArray(ids) ? ids.join(',') : ids;
+
+    return get('videos/', { params: {
+      id: formattedIds,
+      part: 'snippet,contentDetails,statistics',
+    }});
+  }
+};
