@@ -14,5 +14,5 @@ export const Player = styled.div`
   top: -60px;
   height: calc(100vh - 50px);
   width: 100%;
-  /* display: none; */
+  display: none;
 `;

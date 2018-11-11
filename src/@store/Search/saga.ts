@@ -3,22 +3,9 @@ import { get } from 'lodash';
 
 import { Type, Category } from 'types/youtube';
 import { Search } from '@services/youtube';
+import { getArtist } from '@utils/youtube';
 
 import { SEARCH, SEARCH_TYPE } from './actions';
-
-const getArtist = (title: string) => {
-  // TODO: improve regex
-  const arr = title.match(/[^-]+/g);
-
-  if (arr) {
-    const [artistName = '', title = ''] = arr;
-    return {
-      artistName: artistName.trim(),
-      title: title.trim(),
-    };
-  }
-  return {};
-};
 
 function* fetchSearchData(action) {
   try {
@@ -27,9 +14,9 @@ function* fetchSearchData(action) {
     const { data: songData } = yield call(Search.list, action.query, 6, Type.VIDEO, Category.MUSIC);
     const { data: artistData } = yield call(Search.list, action.query, 4, Type.CHANNEL);
     const { data: playlistData } = yield call(Search.list, action.query, 4, Type.PLAYLIST);
-
     const songs = songData.items.map((song) => {
       const { artistName, title } = getArtist(song.snippet.title);
+
       return {
         artistName,
         id: song.id.videoId,
