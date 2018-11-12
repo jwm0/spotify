@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   position: fixed;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
+  grid-gap: 50px;
   width: 100%;
   height: ${props => props.theme.sizes.playbar}px;
   bottom: 0;

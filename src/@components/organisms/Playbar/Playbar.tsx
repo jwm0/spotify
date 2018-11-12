@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import YouTube from 'react-youtube';
 import { get } from 'lodash';
+import Slider from 'rc-slider/lib/Slider';
 
 import { playNextSong, playPreviousSong } from '@store/Player/actions';
 
@@ -10,15 +11,31 @@ import {
   Primary, Secondary,
 } from './styles';
 import { Props, State } from './types';
+import PlayerControls from '@components/molecules/PlayerControls';
 
 class Playbar extends React.PureComponent<Props, State> {
   private player: any;
+  private durationInterval: any;
   state = {
+    currentTime: 0,
     showVideo: false,
   };
 
+  componentWillUnmount(){
+    clearInterval(this.durationInterval);
+  }
+
   handlePlayerReady = (e) => {
     this.player = e.target;
+  }
+
+  handleSongStarted = () => {
+    // TODO: Look into this
+    clearInterval(this.durationInterval);
+    this.durationInterval = setInterval(() => {
+      const currentTime = this.player.getCurrentTime();
+      this.setState({ currentTime });
+    }, 1000);
   }
 
   handlePlayerStateChange = (e) => {
@@ -39,6 +56,14 @@ class Playbar extends React.PureComponent<Props, State> {
         this.player.playVideo();
       }
     }
+  }
+
+  handleTimeChange = (value) => {
+    this.player.seekTo(value, true);
+  }
+
+  handleVolumeChange = (value) => {
+    this.player.setVolume(value);
   }
 
   toggleVideoPlayer = () => {
@@ -70,13 +95,17 @@ class Playbar extends React.PureComponent<Props, State> {
           <Primary>{song.title}</Primary>
           <Secondary>{song.artist}</Secondary>
         </SongInfo>
+        <PlayerControls
+          onPlay={this.handlePlay}
+          onNext={this.props.nextSong}
+          onPrev={this.props.prevSong}
+        />
         <div>
-          <button onClick={this.props.prevSong}>prev</button>
-          <button onClick={this.handlePlay}>play/pause</button>
-          <button onClick={this.props.nextSong}>next</button>
-        </div>
-        <div>
-          controls
+          {this.state.currentTime}
+          <Slider
+            defaultValue={100}
+            onChange={this.handleVolumeChange}
+          />
           <button onClick={this.toggleVideoPlayer}>show video</button>
         </div>
       </Wrapper>
@@ -84,6 +113,7 @@ class Playbar extends React.PureComponent<Props, State> {
         <YouTube
           videoId={id}
           onReady={this.handlePlayerReady}
+          onPlay={this.handleSongStarted}
           onStateChange={this.handlePlayerStateChange}
           opts={opts}
         />

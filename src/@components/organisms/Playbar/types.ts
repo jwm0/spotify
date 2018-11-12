@@ -7,4 +7,5 @@ export type Props = {
 
 export type State = {
   showVideo: boolean,
+  currentTime: number,
 };
