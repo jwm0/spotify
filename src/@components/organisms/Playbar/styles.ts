@@ -11,12 +11,13 @@ export const Wrapper = styled.div`
   z-index: 101;
 `;
 
-export const Player = styled.div`
+export const Player = styled.div<any>`
   position: fixed;
   top: -60px;
   height: calc(100vh - 50px);
   width: 100%;
-  display: none;
+  display: ${props => props.show ? 'block' : 'none'};
+  z-index: 101;
 `;
 
 export const SongInfo = styled.div`

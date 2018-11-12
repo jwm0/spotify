@@ -4,3 +4,7 @@ export type Props = {
   nextSong: () => void,
   prevSong: () => void,
 };
+
+export type State = {
+  showVideo: boolean,
+};

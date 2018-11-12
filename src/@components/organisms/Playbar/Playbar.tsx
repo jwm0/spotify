@@ -9,10 +9,13 @@ import {
   Wrapper, Player, SongInfo,
   Primary, Secondary,
 } from './styles';
-import { Props } from './types';
+import { Props, State } from './types';
 
-class Playbar extends React.PureComponent<Props> {
+class Playbar extends React.PureComponent<Props, State> {
   private player: any;
+  state = {
+    showVideo: false,
+  };
 
   handlePlayerReady = (e) => {
     this.player = e.target;
@@ -23,29 +26,29 @@ class Playbar extends React.PureComponent<Props> {
 
     // INFO: Play next song in queue when song is finished
     if (data === 0) {
-      this.handleNextSong();
+      this.props.nextSong();
     }
   }
 
   handlePlay = () => {
     if (this.player) {
-      this.player.playVideo();
+      const playerState = this.player.getPlayerState();
+      if (playerState === 1) {
+        this.player.pauseVideo();
+      } else {
+        this.player.playVideo();
+      }
     }
   }
 
-  handlePause = () => {
-    if (this.player) {
-      this.player.pauseVideo();
-    }
-  }
-
-  handleNextSong = () => {
-    this.props.nextSong();
+  toggleVideoPlayer = () => {
+    this.setState(state => ({ showVideo: !state.showVideo }));
   }
 
   render() {
     const { nowPlaying, queue } = this.props.player;
-    const id = get(queue[nowPlaying], 'id', '');
+    const song = queue[nowPlaying] || {};
+    const id = get(song, 'id', '');
     const opts = {
       height: '100%',
       playerVars: {
@@ -64,19 +67,20 @@ class Playbar extends React.PureComponent<Props> {
       <>
       <Wrapper>
         <SongInfo>
-          <Primary>{nowPlaying.title}</Primary>
-          <Secondary>{nowPlaying.artist}</Secondary>
+          <Primary>{song.title}</Primary>
+          <Secondary>{song.artist}</Secondary>
         </SongInfo>
         <div>
-          <button onClick={this.handlePlay}>play</button>
-          <button onClick={this.handlePause}>pause</button>
-          <button onClick={this.handleNextSong}>next</button>
+          <button onClick={this.props.prevSong}>prev</button>
+          <button onClick={this.handlePlay}>play/pause</button>
+          <button onClick={this.props.nextSong}>next</button>
         </div>
         <div>
           controls
+          <button onClick={this.toggleVideoPlayer}>show video</button>
         </div>
       </Wrapper>
-      <Player>
+      <Player show={this.state.showVideo}>
         <YouTube
           videoId={id}
           onReady={this.handlePlayerReady}

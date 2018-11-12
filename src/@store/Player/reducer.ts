@@ -26,10 +26,7 @@ const PlayerReducer = (state = InitialState, action) => {
     case PLAYER.NEXT_SONG: {
       const queueSize = state.queue.length;
       const index = state.nowPlaying;
-      let newIndex = 0;
-      if (state.nowPlaying > 0) {
-        newIndex = index + 1 >= queueSize ? index : index + 1;
-      };
+      const newIndex = index + 1 >= queueSize ? index : index + 1;
 
       return {
         ...state,
