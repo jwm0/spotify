@@ -18,6 +18,7 @@ class TileGrid extends React.Component<Props> {
         {tiles.map((tile, i) => (
           <Tile
             key={i}
+            id={tile.id}
             name={tile.name}
             background={tile.background}
           />

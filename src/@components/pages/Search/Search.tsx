@@ -26,6 +26,7 @@ class Search extends React.Component<Props> {
                 {songs.map(song => (
                   <InfoTile
                     key={song.id}
+                    id={song.id}
                     thumbnail={song.thumbnail.url}
                     primary={song.title}
                     secondary={song.artistName}
@@ -36,6 +37,7 @@ class Search extends React.Component<Props> {
                 {artists.map(artist => (
                   <InfoTile
                     key={artist.id}
+                    id={artist.id}
                     thumbnail={artist.thumbnail.url}
                     primary={artist.name}
                     isRound
@@ -46,6 +48,7 @@ class Search extends React.Component<Props> {
                 {playlists.map(playlist => (
                   <InfoTile
                     key={playlist.id}
+                    id={playlist.id}
                     thumbnail={playlist.thumbnail.url}
                     primary={playlist.title}
                     secondary={`by ${playlist.creatorName}`}

@@ -5,4 +5,7 @@ export type Props = {
   playCount: string,
   quality: string,
   title: string,
+  nowPlayingId: string,
+  setPlaying: (id: string, artist: string, title: string) => void,
+  cueSong: (id: string, artist: string, title: string) => void,
 };
