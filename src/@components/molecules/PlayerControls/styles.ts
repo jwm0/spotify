@@ -7,7 +7,15 @@ export const Wrapper = styled.div`
   align-items: center;
 `;
 
+export const Time = styled.span<any>`
+  width: 60px;
+  word-break: normal;
+  text-align: ${props => props.left ? 'start' : 'end'};
+`;
+
 export const ProgressBar = styled.div`
+  display: flex;
+  align-items: center;
   width: 100%;
 `;
 

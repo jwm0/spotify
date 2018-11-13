@@ -1,10 +1,15 @@
 import * as React from 'react';
 import Slider from 'rc-slider/lib/Slider';
+import { Duration } from 'luxon';
 import 'rc-slider/assets/index.css';
 
-import { Wrapper, Controls, ProgressBar } from './styles';
+import { Wrapper, Controls, ProgressBar, Time } from './styles';
+import { Props } from './types';
 
-class PlayerControls extends React.PureComponent<any> {
+const getDuration = (duration: number) =>
+  Duration.fromMillis(duration * 1000).toFormat('m:ss');
+
+class PlayerControls extends React.PureComponent<Props> {
   render() {
     return (
       <Wrapper>
@@ -14,7 +19,15 @@ class PlayerControls extends React.PureComponent<any> {
           <button onClick={this.props.onNext}>next</button>
         </Controls>
         <ProgressBar>
-          <Slider />
+          <Time left>{getDuration(this.props.currentTime)}</Time>
+          <Slider
+            onBeforeChange={this.props.onSkippingBegin}
+            onChange={this.props.onSliderChange}
+            onAfterChange={this.props.onSkippingDone}
+            max={this.props.songDuration}
+            value={this.props.currentTime}
+          />
+          <Time>{getDuration(this.props.songDuration)}</Time>
         </ProgressBar>
       </Wrapper>
     )

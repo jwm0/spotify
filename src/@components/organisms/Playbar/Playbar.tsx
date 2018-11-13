@@ -18,6 +18,7 @@ class Playbar extends React.PureComponent<Props, State> {
   private durationInterval: any;
   state = {
     currentTime: 0,
+    duration: 0,
     showVideo: false,
   };
 
@@ -31,11 +32,9 @@ class Playbar extends React.PureComponent<Props, State> {
 
   handleSongStarted = () => {
     // TODO: Look into this
-    clearInterval(this.durationInterval);
-    this.durationInterval = setInterval(() => {
-      const currentTime = this.player.getCurrentTime();
-      this.setState({ currentTime });
-    }, 1000);
+    this.clearDurationInterval();
+    this.setState({ duration: this.player.getDuration() });
+    this.setDurationInterval();
   }
 
   handlePlayerStateChange = (e) => {
@@ -58,12 +57,31 @@ class Playbar extends React.PureComponent<Props, State> {
     }
   }
 
+  setDurationInterval = () => {
+    this.durationInterval = setInterval(() => {
+      const currentTime = this.player.getCurrentTime();
+      this.setState({ currentTime });
+    }, 200);
+  }
+
+  clearDurationInterval = () => {
+    clearInterval(this.durationInterval);
+  }
+
+  handleSliderChange = (value) => {
+    this.setState({ currentTime: value });
+  }
+
   handleTimeChange = (value) => {
-    this.player.seekTo(value, true);
+    if (this.player) {
+      this.player.seekTo(value, true);
+    }
   }
 
   handleVolumeChange = (value) => {
-    this.player.setVolume(value);
+    if (this.player) {
+      this.player.setVolume(value);
+    }
   }
 
   toggleVideoPlayer = () => {
@@ -99,6 +117,11 @@ class Playbar extends React.PureComponent<Props, State> {
           onPlay={this.handlePlay}
           onNext={this.props.nextSong}
           onPrev={this.props.prevSong}
+          songDuration={this.state.duration}
+          onSkippingBegin={this.clearDurationInterval}
+          onSliderChange={this.handleSliderChange}
+          onSkippingDone={this.handleTimeChange}
+          currentTime={this.state.currentTime}
         />
         <div>
           {this.state.currentTime}
