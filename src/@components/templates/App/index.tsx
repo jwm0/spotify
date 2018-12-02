@@ -10,6 +10,7 @@ import Playbar from '@components/organisms/Playbar';
 import Main from '@components/pages/Main';
 import Search from '@components/pages/Search';
 import SongResults from '@components/pages/SongResults';
+import Playlist from '@components/pages/Playlist';
 
 import { Wrapper } from './styles';
 
@@ -23,6 +24,7 @@ const AppRouter = () => (
         <Route path="/browse" exact component={Main} />
         <Route path="/search" exact component={Search} />
         <Route path="/search/songs/:query" component={SongResults} />
+        <Route path="/playlist/:id" component={Playlist} />
       </Content>
     </Wrapper>
   </Router>

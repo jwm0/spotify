@@ -26,7 +26,9 @@ class Searchbar extends React.PureComponent<any, any> {
     this.setState({
       [name]: value,
     });
-    this.debouncedSearch(value);
+    if (value.length > 0) {
+      this.debouncedSearch(value);
+    }
   }
 
   render() {

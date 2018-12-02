@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.li`
+export const Wrapper = styled.li<any>`
+  background-color: ${props => props.active ? 'rgba(255, 255, 255, 0.2)' : 'transparent'};
   display: grid;
   grid-template-columns: 40px auto 40px 40px;
   grid-gap: 10px;

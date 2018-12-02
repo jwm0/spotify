@@ -3,4 +3,5 @@ export type Props = {
   secondary?: string,
   thumbnail: string,
   isRound?: boolean,
+  id: string,
 }
