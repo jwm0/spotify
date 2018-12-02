@@ -5,13 +5,17 @@ import { get } from 'lodash';
 import Slider from 'rc-slider/lib/Slider';
 
 import { playNextSong, playPreviousSong } from '@store/Player/actions';
+import PlayerControls, { CustomHandle } from '@components/molecules/PlayerControls';
+import { trackStyle, railStyle, Button } from '@components/molecules/PlayerControls/styles';
+import VideoIcon from '@assets/Icons/video.svg';
+import VolumeIcon from '@assets/Icons/volume.svg';
 
 import {
   Wrapper, Player, SongInfo,
-  Primary, Secondary,
+  Primary, Secondary, MoreControls,
 } from './styles';
 import { Props, State } from './types';
-import PlayerControls from '@components/molecules/PlayerControls';
+import Icon from '@components/atoms/Icon';
 
 class Playbar extends React.PureComponent<Props, State> {
   private player: any;
@@ -78,10 +82,32 @@ class Playbar extends React.PureComponent<Props, State> {
     }
   }
 
+  handlePreviousSong = () => {
+    if (this.state.currentTime > 5) {
+      this.player && this.player.seekTo(0, true);
+    } else {
+      this.props.prevSong();
+    }
+  }
+
   handleVolumeChange = (value) => {
     if (this.player) {
+      this.player.isMuted() && this.player.unMute();
       this.player.setVolume(value);
     }
+  }
+
+  handleMute = () => {
+    if (this.player) {
+      this.player.isMuted() ? this.player.unMute() : this.player.mute();
+    }
+  }
+
+  isPlaying = () => {
+    if (this.player) {
+      return this.player.getPlayerState() === 1;
+    }
+    return false;
   }
 
   toggleVideoPlayer = () => {
@@ -114,23 +140,37 @@ class Playbar extends React.PureComponent<Props, State> {
           <Secondary>{song.artist}</Secondary>
         </SongInfo>
         <PlayerControls
+          isPlaying={this.isPlaying()}
           onPlay={this.handlePlay}
           onNext={this.props.nextSong}
-          onPrev={this.props.prevSong}
+          onPrev={this.handlePreviousSong}
           songDuration={this.state.duration}
           onSkippingBegin={this.clearDurationInterval}
           onSliderChange={this.handleSliderChange}
           onSkippingDone={this.handleTimeChange}
           currentTime={this.state.currentTime}
         />
-        <div>
-          {this.state.currentTime}
+        <MoreControls>
+          <Button onClick={this.toggleVideoPlayer}>
+            <Icon
+              image={VideoIcon}
+              size={20}
+            />
+          </Button>
+          <Button onClick={this.handleMute}>
+            <Icon
+              image={VolumeIcon}
+              size={20}
+            />
+          </Button>
           <Slider
             defaultValue={100}
             onChange={this.handleVolumeChange}
+            trackStyle={trackStyle}
+            railStyle={railStyle}
+            handle={CustomHandle}
           />
-          <button onClick={this.toggleVideoPlayer}>show video</button>
-        </div>
+        </MoreControls>
       </Wrapper>
       <Player show={this.state.showVideo}>
         <YouTube

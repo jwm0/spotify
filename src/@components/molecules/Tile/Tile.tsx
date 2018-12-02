@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
+import ImageTile from '@components/atoms/ImageTile';
 
 import { setNowPlaying } from '@store/Player/actions';
 
 import { Props } from './types';
-import { Wrapper, Box, PlayButton, Caption } from './styles';
+import { Wrapper, PlayButton, Caption } from './styles';
 
 class Tile extends React.PureComponent<Props> {
   handleSetNowPlaying = () => {
@@ -19,13 +20,13 @@ class Tile extends React.PureComponent<Props> {
 
     return (
       <Wrapper>
-        <Box
+        <ImageTile
           background={background}
           size={size}
           isRound={isRound}
         >
           <PlayButton onClick={this.handleSetNowPlaying} />
-        </Box>
+        </ImageTile>
         {name && <Caption>{name}</Caption>}
       </Wrapper>
     )
