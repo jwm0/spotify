@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.nav`
-  background-color: ${props => props.theme.colors.primary.black};
+  background-color: ${props => props.theme.colors.black};
   position: fixed;
   left: 0;
   height: 100vh;

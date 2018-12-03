@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 export const StyledInput = styled.input`
   background-color: #282828;
   color: #fff;
-  caret-color: #1db954;
+  caret-color: ${props => props.theme.colors.secondary};
   width: 100%;
   padding: 20px 10px;
   outline: none;
@@ -22,7 +22,7 @@ export const StyledInput = styled.input`
   }
 
   &::placeholder {
-    color: #1db954;
+    color: ${props => props.theme.colors.secondary};
     opacity: 1;
   }
 `;

@@ -11,6 +11,7 @@ import Main from '@components/pages/Main';
 import Search from '@components/pages/Search';
 import SongResults from '@components/pages/SongResults';
 import Playlist from '@components/pages/Playlist';
+import Library from '@components/pages/Library';
 
 import { Wrapper } from './styles';
 
@@ -25,6 +26,7 @@ const AppRouter = () => (
         <Route path="/search" exact component={Search} />
         <Route path="/search/songs/:query" component={SongResults} />
         <Route path="/playlist/:id" component={Playlist} />
+        <Route path="/library" component={Library} />
       </Content>
     </Wrapper>
   </Router>
