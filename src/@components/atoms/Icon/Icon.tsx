@@ -8,6 +8,7 @@ const Icon: React.SFC<Props> = (props) => {
     <Wrapper
       src={props.image}
       size={props.size}
+      noGutter={props.noGutter}
     />
   );
 };

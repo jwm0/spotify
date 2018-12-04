@@ -24,7 +24,6 @@ class Library extends React.Component<any> {
           tiles={playlists}
           type="playlist"
         />
-        <button onClick={this.handleNewPlaylist}>create test playlist</button>
       </div>
     )
   }

@@ -3,7 +3,7 @@ const theme = {
     black: 'rgba(0, 0, 0, 0.8)',
     gray: '#282828',
     primary: '#507DBC',
-    secondary: '#B98EA7',
+    secondary: '#da8f1a',
   },
   sizes: {
     navigation: 220,

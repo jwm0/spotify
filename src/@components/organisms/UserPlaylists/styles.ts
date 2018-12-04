@@ -10,18 +10,17 @@ export const ModalBackdrop = styled.div`
   z-index: 9999;
 `;
 
-export const ModalClose = styled.button`
-  background: none;
-  border: 0;
-  cursor: pointer;
-  line-height: 1;
-  margin: 0;
-  outline: none;
-  padding: 0;
+export const ModalClose = styled.div`
   position: absolute;
   right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 15px;
+`;
+
+export const ModalHeader = styled.div`
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  font-size: 35px;
 `;
 
 export const ModalBody = styled.div`

@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { createPortal } from 'react-dom';
 
+import IconButton from '@components/atoms/IconButton';
+import cross from '@assets/Icons/cross.svg';
+
 import {
   ModalBackdrop, ModalDialog, ModalBody,
   ModalClose, ModalHeader,
@@ -63,8 +66,12 @@ class Modal extends React.PureComponent<Props, State> {
                 >
                   <ModalHeader>
                     {onClose &&
-                      <ModalClose onClick={onClose}>
-                        X
+                      <ModalClose>
+                        <IconButton
+                          image={cross}
+                          size={12}
+                          onClick={onClose}
+                        />
                       </ModalClose>
                     }
                   </ModalHeader>

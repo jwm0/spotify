@@ -15,6 +15,7 @@ import registerServiceWorker from './registerServiceWorker';
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: #191814;
+    color: #fff;
     overscroll-behavior: none;
   }
 `;

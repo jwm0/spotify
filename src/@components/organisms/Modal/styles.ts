@@ -36,17 +36,11 @@ export const ModalHeader = styled.div`
   padding: 15px 0;
 `;
 
-export const ModalClose = styled.button`
-  background: none;
-  border: 0;
-  cursor: pointer;
-  line-height: 1;
-  margin: 0;
-  outline: none;
+export const ModalClose = styled.div`
   padding: 0;
   position: absolute;
-  right: 15px;
-  top: 50%;
+  right: 0;
+  top: 20px;
   transform: translateY(-50%);
 `;
 

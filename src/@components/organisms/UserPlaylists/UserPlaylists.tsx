@@ -4,9 +4,11 @@ import { createPortal } from 'react-dom';
 
 import TileGrid from '@components/organisms/TileGrid';
 import { requestAddSongToPlaylist } from '@store/User/actions';
+import IconButton from '@components/atoms/IconButton';
+import cross from '@assets/Icons/cross.svg';
 
 import {
-  ModalBackdrop, ModalBody, ModalClose,
+  ModalBackdrop, ModalBody, ModalClose, ModalHeader,
 } from './styles';
 import { Props, State } from './types';
 
@@ -48,16 +50,22 @@ class Modal extends React.PureComponent<Props, State> {
               <ModalBackdrop
                 ref={this.backdrop}
               >
-                <ModalClose
-                  onClick={onClose}
-                >
-                  x
+                <ModalClose>
+                  <IconButton
+                    image={cross}
+                    size={30}
+                    onClick={onClose}
+                  />
                 </ModalClose>
+                <ModalHeader>
+                  Add song to one of playlists
+                </ModalHeader>
                 <ModalBody>
                   <TileGrid
                     tiles={this.props.playlists}
                     type="add"
                     customOnClick={this.props.addToPlaylist}
+                    size={300}
                   />
                 </ModalBody>
               </ModalBackdrop>,
