@@ -11,7 +11,7 @@ class TileGrid extends React.Component<Props> {
   }
 
   render() {
-    const { tiles } = this.props;
+    const { tiles, isPlaylist } = this.props;
 
     return (
       <Wrapper>
@@ -21,6 +21,7 @@ class TileGrid extends React.Component<Props> {
             id={tile.id}
             name={tile.name}
             background={tile.background}
+            isPlaylist={isPlaylist}
           />
         ))}
       </Wrapper>

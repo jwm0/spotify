@@ -25,7 +25,10 @@ class Main extends React.Component {
   render() {
     return (
       <div>
-        <TileGrid tiles={playlists} />
+        <TileGrid
+          tiles={playlists}
+          isPlaylist
+        />
       </div>
     )
   }

@@ -20,7 +20,10 @@ class Library extends React.Component<any> {
 
     return (
       <div>
-        <TileGrid tiles={playlists} />
+        <TileGrid
+          tiles={playlists}
+          isPlaylist
+        />
         <button onClick={this.handleNewPlaylist}>create test playlist</button>
       </div>
     )

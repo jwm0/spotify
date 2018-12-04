@@ -6,5 +6,6 @@ export type Props = {
   isRound?: boolean,
   id: string,
   name?: string,
+  isPlaylist?: boolean,
   setPlaying: (id: string, artist: string, title: string) => void,
 };

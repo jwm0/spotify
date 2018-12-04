@@ -3,7 +3,7 @@ import { firebase, facebookAuthProvider, googleAuthProvider, database } from '@s
 
 import { PLAYLIST, USER } from './actions';
 
-const getUserID = state => state.user.uid;
+const getUser = state => state.user;
 const authProvider = {
   'facebook': facebookAuthProvider,
   'google': googleAuthProvider,
@@ -44,11 +44,12 @@ function* startLogout(action) {
 function* createPlaylist(action) {
   try {
     const { data: { name, description, image } } = action;
-    const uid = yield select(getUserID);
+    const { uid, name: authorName } = yield select(getUser);
     console.log(uid);
     const key = database.ref('playlists').push().key;
     const playlist = {
       authorId: uid,
+      authorName,
       description,
       image,
       name,

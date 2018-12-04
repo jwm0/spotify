@@ -10,6 +10,13 @@ export const PlaylistInfo = styled.div`
   border-bottom: 1px solid hsla(0,0%,100%,.1);
 `;
 
+export const InfoWrapper = styled.div`
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
 export const Info = styled.div`
   display: flex;
   flex-direction: column;
@@ -26,7 +33,6 @@ export const SecondaryText = styled.span`
 `;
 
 export const Controls = styled.div`
-
 `;
 
 export const PlayButton = styled.button`
@@ -64,4 +70,9 @@ export const Image = styled.div<any>`
   width: 200px;
   height: 200px;
   border-radius: ${props => props.isRound && '50%'};
+`;
+
+export const Description = styled.div`
+  margin-left: 10px;
+  padding: 10px 0;
 `;

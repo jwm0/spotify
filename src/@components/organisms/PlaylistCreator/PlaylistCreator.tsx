@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { Wrapper, Input, Textarea } from './styles';
+import { requestPlaylistCreate } from '@store/User/actions';
 
-class PlaylistCreator extends React.PureComponent {
+import { Wrapper, Input, Textarea, FormWrapper, Label, SubmitButton, FullWidth } from './styles';
+import { Props } from './types';
+
+class PlaylistCreator extends React.PureComponent<Props> {
   state = {
     description: '',
     image: '',
@@ -18,24 +21,45 @@ class PlaylistCreator extends React.PureComponent {
     })
   }
 
+  handleSubmit = () => {
+    const { name, image, description } = this.state;
+
+    this.props.createPlaylist({ name, image, description });
+  }
+
   render() {
     const { name, description } = this.state;
 
     return (
       <Wrapper>
-        <Input
-          name="name"
-          value={name}
-          onChange={this.handleChange}
-        />
-        <Textarea
-          name="description"
-          value={description}
-          onChange={this.handleChange}
-        />
+        <FullWidth>
+          <Label>Name</Label>
+          <Input
+            name="name"
+            value={name}
+            onChange={this.handleChange}
+          />
+        </FullWidth>
+        <FormWrapper>
+          <FullWidth>
+            <Label>Description</Label>
+            <Textarea
+              name="description"
+              value={description}
+              onChange={this.handleChange}
+            />
+          </FullWidth>
+        </FormWrapper>
+        <SubmitButton onClick={this.handleSubmit}>
+          CREATE
+        </SubmitButton>
       </Wrapper>
     )
   }
 }
 
-export default connect()(PlaylistCreator);
+const mapDispatchToProps = dispatch => ({
+  createPlaylist: (data: { name, description, image }) => dispatch(requestPlaylistCreate(data))
+});
+
+export default connect(null, mapDispatchToProps)(PlaylistCreator);

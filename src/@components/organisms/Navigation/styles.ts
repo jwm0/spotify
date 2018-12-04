@@ -19,7 +19,12 @@ export const Menu = styled.div`
 `;
 
 export const StyledLink = styled(NavLink)`
+  color: #fff;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 22px;
   text-decoration: none;
+
+  &:hover {
+    color: ${props => props.theme.colors.secondary};
+  }
 `;

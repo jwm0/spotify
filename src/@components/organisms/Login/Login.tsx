@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { requestLogin, requestLogout } from '@store/User/actions';
 
 import { PROVIDER, Props } from './types';
-import { Wrapper, LoginButton } from './styles';
+import { Wrapper, LoginButton, Header } from './styles';
 
 class Login extends React.PureComponent<Props> {
   handleLogin = (provider: PROVIDER) => () => {
@@ -14,14 +14,17 @@ class Login extends React.PureComponent<Props> {
   render() {
     return (
       <Wrapper>
+        <Header>
+          Create an account to make and save playlists!
+        </Header>
         <LoginButton
-          color="blue"
+          color="#3b5998"
           onClick={this.handleLogin(PROVIDER.FACEBOOK)}
         >
           login with facebook
         </LoginButton>
         <LoginButton
-          color="red"
+          color="#d62d20"
           onClick={this.handleLogin(PROVIDER.GOOGLE)}
         >
           login with google

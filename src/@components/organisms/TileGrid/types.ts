@@ -2,4 +2,5 @@
 
 export type Props = {
   tiles: any,
+  isPlaylist?: boolean,
 }

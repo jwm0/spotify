@@ -6,7 +6,7 @@ import ImageTile from '@components/atoms/ImageTile';
 import { setNowPlaying } from '@store/Player/actions';
 
 import { Props } from './types';
-import { Wrapper, PlayButton, Caption } from './styles';
+import { Wrapper, PlayButton, Caption, StyledLink } from './styles';
 
 class Tile extends React.PureComponent<Props> {
   handleSetNowPlaying = () => {
@@ -16,7 +16,7 @@ class Tile extends React.PureComponent<Props> {
   }
 
   render() {
-    const { background, name, size, isRound } = this.props;
+    const { background, name, size, isRound, isPlaylist, id } = this.props;
 
     return (
       <Wrapper>
@@ -25,7 +25,10 @@ class Tile extends React.PureComponent<Props> {
           size={size}
           isRound={isRound}
         >
+          {isPlaylist ?
+          <StyledLink to={`/playlist/${id}`} /> :
           <PlayButton onClick={this.handleSetNowPlaying} />
+          }
         </ImageTile>
         {name && <Caption>{name}</Caption>}
       </Wrapper>

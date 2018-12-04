@@ -1,18 +1,18 @@
 import { all, takeLatest, put, call } from 'redux-saga/effects';
+import { database } from '@services/firebase';
 import { get } from 'lodash';
 
 import { Details } from '@services/youtube';
 import { getArtist } from '@utils/youtube';
 
-import { DETAILS } from './actions';
+import { DETAILS, PLAYLIST } from './actions';
 
 function* fetchSongDetails(action) {
   try {
     yield put({ type: DETAILS.STARTED });
-
     const { data } = yield call(Details.list, action.ids);
 
-    const details = data.items.map((song) => {
+    const items = data.items.map((song) => {
       const { artistName, title } = getArtist(song.snippet.title);
 
       return {
@@ -27,7 +27,7 @@ function* fetchSongDetails(action) {
     });
 
     yield put({
-      payload: { details },
+      payload: { items },
       type: DETAILS.SUCCEED,
     });
   } catch (error) {
@@ -39,9 +39,27 @@ function* fetchSongDetails(action) {
   yield put({ type: DETAILS.FINISHED });
 }
 
+function* fetchPlaylistById(action) {
+  try {
+    const snapshot = yield call(() => database.ref(`playlists/${action.id}`).once('value'));
+    const { songs = [], ...details } = snapshot.val();
+    console.log(songs);
+    yield put({
+      details,
+      type: PLAYLIST.PUT,
+    });
+
+    yield put({
+      ids: songs,
+      type: DETAILS.REQUESTED,
+    });
+  } catch(e) {}
+}
+
 export default function* playlistSaga() {
   yield all([
     // TODO: fix type casting
     takeLatest(DETAILS.REQUESTED as any, fetchSongDetails),
+    takeLatest(PLAYLIST.REQUEST as any, fetchPlaylistById),
   ]);
 }
