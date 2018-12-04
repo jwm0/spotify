@@ -6,6 +6,7 @@ export type Props = {
   isRound?: boolean,
   id: string,
   name?: string,
-  isPlaylist?: boolean,
+  type?: 'song' | 'playlist' | 'artist' | 'add',
   setPlaying: (id: string, artist: string, title: string) => void,
+  customOnClick?: any,
 };

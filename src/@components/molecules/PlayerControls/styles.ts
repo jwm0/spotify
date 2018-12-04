@@ -55,14 +55,3 @@ export const ProgressBar = styled.div`
 export const Controls = styled.div`
 
 `;
-
-export const Button = styled.button`
-  border: none;
-  background: none;
-  cursor: pointer;
-  outline: none;
-
-  &:hover {
-    transform: scale(1.05);
-  }
-`;

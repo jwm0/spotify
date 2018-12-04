@@ -42,15 +42,16 @@ function* fetchSongDetails(action) {
 function* fetchPlaylistById(action) {
   try {
     const snapshot = yield call(() => database.ref(`playlists/${action.id}`).once('value'));
-    const { songs = [], ...details } = snapshot.val();
-    console.log(songs);
+    const { songs = {}, ...details } = snapshot.val();
+    const items = Object.keys(songs).map(key => songs[key]);
+
     yield put({
       details,
       type: PLAYLIST.PUT,
     });
 
     yield put({
-      ids: songs,
+      ids: items,
       type: DETAILS.REQUESTED,
     });
   } catch(e) {}

@@ -22,7 +22,7 @@ class Library extends React.Component<any> {
       <div>
         <TileGrid
           tiles={playlists}
-          isPlaylist
+          type="playlist"
         />
         <button onClick={this.handleNewPlaylist}>create test playlist</button>
       </div>

@@ -47,8 +47,9 @@ export const requestPlaylistDelete = (id: string) => ({
   type: PLAYLIST.REQUEST_DELETE,
 });
 
-export const requestAddSongToPlaylist = (id: string) => ({
-  id,
+export const requestAddSongToPlaylist = (playlistId: string, songId: string) => ({
+  playlistId,
+  songId,
   type: PLAYLIST.REQUEST_ADD_TO,
 });
 

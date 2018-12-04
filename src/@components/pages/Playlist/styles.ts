@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { lighten } from 'polished';
 
 export const PlaylistInfo = styled.div`
   display: flex;
@@ -36,7 +37,7 @@ export const Controls = styled.div`
 `;
 
 export const PlayButton = styled.button`
-  background-color: #1db954;
+  background-color: ${props => props.theme.colors.secondary};
   padding: 11px 44px;
   font-size: 11px;
   text-transform: uppercase;
@@ -56,8 +57,8 @@ export const PlayButton = styled.button`
   user-select: none;
 
   &:hover {
-    background-color: #1ed760;
-    transform: scale(1.06);
+    background-color: ${props => lighten(0.1, props.theme.colors.secondary)};
+    transform: scale(1.02);
   }
 `;
 

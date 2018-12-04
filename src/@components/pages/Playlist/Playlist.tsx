@@ -10,9 +10,6 @@ import {
   Controls, Info, PlayButton, InfoWrapper, Description,
 } from './styles';
 
-// TODO: mock data, remove
-const ids = [];
-
 class Playlist extends React.Component<any> {
   componentDidMount() {
     const { id } = this.props.match.params;
@@ -43,7 +40,7 @@ class Playlist extends React.Component<any> {
             </InfoWrapper>
           </PlaylistInfo>
         </div>
-        <SongsList songIds={ids} />
+        <SongsList />
       </>
     )
   }

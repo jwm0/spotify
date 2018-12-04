@@ -7,21 +7,24 @@ import { Props } from './types';
 
 class TileGrid extends React.Component<Props> {
   static defaultProps = {
+    size: 200,
     tiles: [],
   }
 
   render() {
-    const { tiles, isPlaylist } = this.props;
+    const { tiles, type, size, customOnClick } = this.props;
 
     return (
-      <Wrapper>
+      <Wrapper size={size}>
         {tiles.map((tile, i) => (
           <Tile
             key={i}
             id={tile.id}
             name={tile.name}
             background={tile.background}
-            isPlaylist={isPlaylist}
+            type={type}
+            size={size}
+            customOnClick={customOnClick}
           />
         ))}
       </Wrapper>

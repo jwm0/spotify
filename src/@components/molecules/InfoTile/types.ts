@@ -4,4 +4,5 @@ export type Props = {
   thumbnail: string,
   isRound?: boolean,
   id: string,
+  type?: 'song' | 'playlist' | 'artist',
 }

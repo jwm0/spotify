@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import { Duration } from 'luxon';
 import { get } from 'lodash';
 
-import Icon from '@components/atoms/Icon';
+import UserPlaylists from '@components/organisms/UserPlaylists';
+import IconButton from '@components/atoms/IconButton';
 import { setNowPlaying, addSongToQueue } from '@store/Player/actions';
-import heart_empty from '@assets/Icons/heart_empty.svg';
+import play from '@assets/Icons/play.svg';
 import playlist from '@assets/Icons/playlist.svg';
+import queue from '@assets/Icons/queue.svg';
 
 import { Wrapper, Details, DurationText, Primary, Secondary } from './styles';
 import { Props } from './types';
@@ -15,6 +17,10 @@ const getDuration = (duration: string) =>
   Duration.fromISO(duration).toFormat('m:ss');
 
 class SongListItem extends React.PureComponent<Props> {
+  state = {
+    showPlaylists: false,
+  };
+
   handleSetNowPlaying = () => {
     const { artistName, title, id } = this.props;
 
@@ -27,6 +33,14 @@ class SongListItem extends React.PureComponent<Props> {
     this.props.cueSong(id, artistName, title);
   }
 
+  handleShowPlaylists = () => {
+    this.setState({ showPlaylists: true });
+  }
+
+  handleHidePlaylists = () => {
+    this.setState({ showPlaylists: false });
+  }
+
   render() {
     const {
       artistName, title, duration,
@@ -35,24 +49,36 @@ class SongListItem extends React.PureComponent<Props> {
     const isPlaying = id === nowPlayingId;
 
     return (
-      <Wrapper active={isPlaying}>
-        <Icon
-          image={heart_empty}
-          size={20}
-        />
-        <Details>
-          <Primary>{title}</Primary>
-          <Secondary>{artistName}</Secondary>
-          <button onClick={this.handleSetNowPlaying}>play</button>
-        </Details>
-        <button onClick={this.handleCueSong}>
-          <Icon
+      <>
+        <Wrapper active={isPlaying}>
+          <IconButton
+            onClick={this.handleSetNowPlaying}
+            image={play}
+            size={20}
+          />
+          <Details>
+            <Primary>{title}</Primary>
+            <Secondary>{artistName}</Secondary>
+          </Details>
+          <IconButton
+            onClick={this.handleShowPlaylists}
             image={playlist}
             size={20}
           />
-        </button>
-        <DurationText>{getDuration(duration)}</DurationText>
-      </Wrapper>
+          <IconButton
+            onClick={this.handleCueSong}
+            image={queue}
+            size={20}
+          />
+          <DurationText>{getDuration(duration)}</DurationText>
+        </Wrapper>
+        {this.state.showPlaylists &&
+          <UserPlaylists
+            onClose={this.handleHidePlaylists}
+            songId={id}
+          />
+        }
+      </>
     );
   }
 }

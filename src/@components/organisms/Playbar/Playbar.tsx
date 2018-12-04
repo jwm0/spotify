@@ -6,7 +6,8 @@ import Slider from 'rc-slider/lib/Slider';
 
 import { playNextSong, playPreviousSong } from '@store/Player/actions';
 import PlayerControls, { CustomHandle } from '@components/molecules/PlayerControls';
-import { trackStyle, railStyle, Button } from '@components/molecules/PlayerControls/styles';
+import { trackStyle, railStyle } from '@components/molecules/PlayerControls/styles';
+import IconButton from '@components/atoms/IconButton';
 import VideoIcon from '@assets/Icons/video.svg';
 import VolumeIcon from '@assets/Icons/volume.svg';
 
@@ -15,7 +16,6 @@ import {
   Primary, Secondary, MoreControls,
 } from './styles';
 import { Props, State } from './types';
-import Icon from '@components/atoms/Icon';
 
 class Playbar extends React.PureComponent<Props, State> {
   private player: any;
@@ -151,18 +151,16 @@ class Playbar extends React.PureComponent<Props, State> {
           currentTime={this.state.currentTime}
         />
         <MoreControls>
-          <Button onClick={this.toggleVideoPlayer}>
-            <Icon
-              image={VideoIcon}
-              size={20}
-            />
-          </Button>
-          <Button onClick={this.handleMute}>
-            <Icon
-              image={VolumeIcon}
-              size={20}
-            />
-          </Button>
+          <IconButton
+            onClick={this.toggleVideoPlayer}
+            image={VideoIcon}
+            size={25}
+          />
+          <IconButton
+            onClick={this.handleMute}
+            image={VolumeIcon}
+            size={25}
+          />
           <Slider
             defaultValue={100}
             onChange={this.handleVolumeChange}

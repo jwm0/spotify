@@ -7,7 +7,10 @@ import { Wrapper, Description, Primary, Secondary } from './styles';
 
 class InfoTile extends React.PureComponent<Props> {
   render() {
-    const { id, primary, secondary, thumbnail, isRound } = this.props;
+    const {
+      id, primary, secondary, thumbnail,
+      isRound, type,
+    } = this.props;
 
     return (
       <Wrapper>
@@ -18,6 +21,7 @@ class InfoTile extends React.PureComponent<Props> {
           title={primary}
           artistName={secondary}
           id={id}
+          type={type}
         />
         <Description>
           <Primary>{primary}</Primary>

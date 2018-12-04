@@ -27,7 +27,7 @@ class Main extends React.Component {
       <div>
         <TileGrid
           tiles={playlists}
-          isPlaylist
+          type="playlist"
         />
       </div>
     )

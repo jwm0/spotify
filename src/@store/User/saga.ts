@@ -45,7 +45,6 @@ function* createPlaylist(action) {
   try {
     const { data: { name, description, image } } = action;
     const { uid, name: authorName } = yield select(getUser);
-    console.log(uid);
     const key = database.ref('playlists').push().key;
     const playlist = {
       authorId: uid,
@@ -76,19 +75,19 @@ function* createPlaylist(action) {
 
 function* addToPlaylist(action) {
   try {
-    const { id } = action;
-    const snapshot = yield database.ref(`playlists/${id}/songs/`).once('value');
-    console.log(snapshot);
-    // let updates = {}
-    // updates[`/playlists/${key}`] = playlist;
+    const { playlistId, songId } = action;
+    console.log(playlistId, songId);
+    const key = database.ref(`playlists/${playlistId}/songs`).push().key;
+    let updates = {}
+    updates[`/playlists/${playlistId}/songs/${key}`] = songId;
     // updates[`/users/${uid}/playlists/${key}`] = metaPlaylist;
 
-    // yield call(database.ref().update, updates);
+    yield call(() => database.ref().update(updates));
 
     // TODO: display notification on success / error
     // yield put({
-    //   payload: { metaPlaylist },
-    //   type: PLAYLIST.CREATE,
+    //   payload: songId,
+    //   type: PLAYLIST.ADD_TO,
     // });
   } catch (error) {}
 }

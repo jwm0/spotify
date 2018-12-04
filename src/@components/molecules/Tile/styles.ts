@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   align-items: center;
 `;
 
-export const PlayButton = styled.button`
+export const Center = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
