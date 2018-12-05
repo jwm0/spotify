@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Modal from '@components/organisms/Modal';
 import Login from '@components/organisms/Login';
 import PlaylistCreator from '@components/organisms/PlaylistCreator';
+import { requestLogout } from '@store/User/actions';
 // import Icon from '@components/atoms/Icon';
 
 import {
@@ -48,7 +49,7 @@ class Navigation extends React.Component<Props> {
               </NewPlaylistButton>
             }
             {this.props.isLoggedIn ?
-              <LoginButton onClick={this.handleShowLoginModal}>Logout</LoginButton> :
+              <LoginButton onClick={this.props.logout}>Logout</LoginButton> :
               <LoginButton onClick={this.handleShowLoginModal}>Login</LoginButton>
             }
           </Menu>
@@ -78,4 +79,8 @@ const mapStateToProps = state => ({
   isLoggedIn: !!state.user.uid,
 });
 
-export default connect(mapStateToProps)(Navigation);
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(requestLogout()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

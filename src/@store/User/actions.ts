@@ -19,6 +19,7 @@ export enum PLAYLIST {
 
 export enum USER {
   REQUEST_LOGIN = 'REQUEST_LOGIN',
+  START_LOGIN = 'START_LOGIN',
   LOGIN = 'LOGIN',
   REQUEST_LOGOUT = 'REQUEST_LOGOUT',
   LOGOUT = 'LOGOUT',
@@ -56,4 +57,9 @@ export const requestAddSongToPlaylist = (playlistId: string, songId: string) => 
 export const requestEditPlaylist = (id: string) => ({
   id,
   type: PLAYLIST.REQUEST_EDIT,
+});
+
+export const startLogin = (information) => ({
+  information,
+  type: USER.START_LOGIN,
 });

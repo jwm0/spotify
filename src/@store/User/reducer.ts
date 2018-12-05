@@ -1,4 +1,4 @@
-import { PLAYLIST, USER } from './actions';
+import { PLAYLIST, USER, USER_PLAYLISTS } from './actions';
 
 const InitialState = {
   name: '',
@@ -13,6 +13,8 @@ const UserReducer = (state = InitialState, action) => {
       return {
         ...action.payload,
       };
+    case USER.LOGOUT:
+      return InitialState;
     case PLAYLIST.CREATE:
       const { metaPlaylist } = action.payload;
 
@@ -22,6 +24,11 @@ const UserReducer = (state = InitialState, action) => {
           ...state.playlists,
           metaPlaylist,
         ],
+      };
+    case USER_PLAYLISTS.SUCCEED:
+      return {
+        ...state,
+        playlists: action.playlists,
       };
     default:
       return state;

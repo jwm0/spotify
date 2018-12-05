@@ -1,7 +1,7 @@
 import { all, takeLatest, put, call, select } from 'redux-saga/effects';
 import { firebase, facebookAuthProvider, googleAuthProvider, database } from '@services/firebase';
 
-import { PLAYLIST, USER } from './actions';
+import { PLAYLIST, USER, USER_PLAYLISTS } from './actions';
 
 const getUser = state => state.user;
 const authProvider = {
@@ -24,11 +24,38 @@ function* startLogin(action) {
       .ref(`users/${information.uid}`)
       .update({ name: information.name, photo: information.photo }));
 
+    yield put({
+      information,
+      type: USER.START_LOGIN,
+    });
+  } catch(e) {}
+}
+
+function* getUserPlaylists(action) {
+  try {
+    const snapshot = yield call(() => database.ref(`users/${action.id}/playlists`).once('value'));
+    const playlists = snapshot.val() || {};
+    const items = Object.keys(playlists).map(key => playlists[key]);
+
     yield put ({
-      payload: information,
-      type: USER.LOGIN,
+      playlists: items,
+      type: USER_PLAYLISTS.SUCCEED,
     })
   } catch(e) {}
+}
+
+function* login(action) {
+  const { information } = action;
+
+  yield put({
+    payload: information,
+    type: USER.LOGIN,
+  });
+
+  yield put({
+    id: information.uid,
+    type: USER_PLAYLISTS.REQUESTED,
+  });
 }
 
 function* startLogout(action) {
@@ -99,6 +126,8 @@ export default function* userSaga() {
     takeLatest(PLAYLIST.REQUEST_CREATE as any, createPlaylist),
     takeLatest(PLAYLIST.REQUEST_ADD_TO as any, addToPlaylist),
     takeLatest(USER.REQUEST_LOGIN as any, startLogin),
+    takeLatest(USER.START_LOGIN as any, login),
     takeLatest(USER.REQUEST_LOGOUT as any, startLogout),
+    takeLatest(USER_PLAYLISTS.REQUESTED as any, getUserPlaylists),
   ]);
 }
