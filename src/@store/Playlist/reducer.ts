@@ -1,5 +1,6 @@
 import { STATUS } from '../types';
 import { DETAILS, PLAYLIST } from './actions';
+import { PLAYLIST as USER_PLAYLIST } from '../User/actions';
 
 const InitialState = {
   authorId: '',
@@ -46,6 +47,16 @@ const PlaylistReducer = (state = InitialState, action) => {
         ...state,
         ...action.details,
       }
+    case USER_PLAYLIST.PUBLISH:
+      return {
+        ...state,
+        public: true,
+      };
+    case USER_PLAYLIST.UNPUBLISH:
+      return {
+        ...state,
+        public: false,
+      };
     default:
       return state;
   }

@@ -30,6 +30,16 @@ const UserReducer = (state = InitialState, action) => {
         ...state,
         playlists: action.playlists,
       };
+    case PLAYLIST.PUBLISH:
+      return {
+        ...state,
+        playlists: action.playlists,
+      };
+    case PLAYLIST.UNPUBLISH:
+      return {
+        ...state,
+        playlists: action.playlists,
+      };
     default:
       return state;
   }

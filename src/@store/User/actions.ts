@@ -15,6 +15,10 @@ export enum PLAYLIST {
   ADD_TO = 'ADD_TO_PLAYLIST',
   REQUEST_EDIT = 'REQUEST_EDIT_PLAYLIST',
   EDIT = 'EDIT_PLAYLIST',
+  REQUEST_PUBLISH = 'REQUEST_PLAYLIST_PUBLISH',
+  PUBLISH =  'PLAYLIST_PUBLISH',
+  REQUEST_UNPUBLISH = 'REQUEST_PLAYLIST_UNPUBLISH',
+  UNPUBLISH =  'PLAYLIST_UNPUBLISH',
 };
 
 export enum USER {
@@ -62,4 +66,16 @@ export const requestEditPlaylist = (id: string) => ({
 export const startLogin = (information) => ({
   information,
   type: USER.START_LOGIN,
+});
+
+export const requestPublishPlaylist = (playlistId, uid) => ({
+  playlistId,
+  type: PLAYLIST.REQUEST_PUBLISH,
+  uid,
+});
+
+export const requestUnpublishPlaylist = (playlistId, uid) => ({
+  playlistId,
+  type: PLAYLIST.REQUEST_UNPUBLISH,
+  uid,
 });
