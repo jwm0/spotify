@@ -20,7 +20,7 @@ firebase.auth().onAuthStateChanged((user) => {
 });
 
 const database = firebase.database();
-const storage = firebase.storage().ref('images');
+const storage = firebase.storage();
 const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
 const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 

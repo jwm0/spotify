@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
+import ImageUploadBox from '@components/molecules/ImageUploadBox';
 import { requestPlaylistCreate } from '@store/User/actions';
 
 import { Wrapper, Input, Textarea, FormWrapper, Label, SubmitButton, FullWidth } from './styles';
@@ -21,9 +22,14 @@ class PlaylistCreator extends React.PureComponent<Props> {
     })
   }
 
+  handleImageSet = (name, value) => {
+    this.setState({
+      [name]: value,
+    });
+  }
+
   handleSubmit = () => {
     const { name, image, description } = this.state;
-
     this.props.createPlaylist({ name, image, description });
   }
 
@@ -41,6 +47,10 @@ class PlaylistCreator extends React.PureComponent<Props> {
           />
         </FullWidth>
         <FormWrapper>
+          <ImageUploadBox
+            name="image"
+            onChange={this.handleImageSet}
+          />
           <FullWidth>
             <Label>Description</Label>
             <Textarea

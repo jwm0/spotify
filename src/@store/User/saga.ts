@@ -1,5 +1,5 @@
 import { all, takeLatest, put, call, select } from 'redux-saga/effects';
-import { firebase, facebookAuthProvider, googleAuthProvider, database } from '@services/firebase';
+import { firebase, facebookAuthProvider, googleAuthProvider, database, storage } from '@services/firebase';
 
 import { PLAYLIST, USER, USER_PLAYLISTS } from './actions';
 
@@ -73,18 +73,24 @@ function* createPlaylist(action) {
     const { data: { name, description, image } } = action;
     const { uid, name: authorName } = yield select(getUser);
     const key = database.ref('playlists').push().key;
+    let imageUrl;
+    if (image) {
+      const snapshot = yield call(() => storage.ref(`playlists/${key}`).put(image));
+      imageUrl = yield call(() => snapshot.ref.getDownloadURL());
+    }
+
     const playlist = {
       authorId: uid,
       authorName,
       description,
-      image,
+      image: imageUrl,
       name,
       songs: [],
     };
     const metaPlaylist = {
       description,
       id: key,
-      image,
+      image: imageUrl,
       name,
     };
 

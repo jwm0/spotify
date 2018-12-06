@@ -21,7 +21,7 @@ class TileGrid extends React.Component<Props> {
             key={i}
             id={tile.id}
             name={tile.name}
-            background={tile.background}
+            background={tile.image}
             type={type}
             size={size}
             customOnClick={customOnClick}
