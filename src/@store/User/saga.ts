@@ -74,7 +74,7 @@ function* createPlaylist(action) {
     const { data: { name, description, image } } = action;
     const { uid, name: authorName } = yield select(getUser);
     const key = database.ref('playlists').push().key;
-    let imageUrl;
+    let imageUrl = '';
     if (image) {
       const snapshot = yield call(() => storage.ref(`playlists/${key}`).put(image));
       imageUrl = yield call(() => snapshot.ref.getDownloadURL());
