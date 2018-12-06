@@ -2,4 +2,7 @@
 
 export type Props = {
   tiles: any,
+  type?: 'song' | 'playlist' | 'add',
+  size?: number,
+  customOnClick?: any,
 }

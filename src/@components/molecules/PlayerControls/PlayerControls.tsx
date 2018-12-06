@@ -3,7 +3,7 @@ import Slider from 'rc-slider/lib/Slider';
 import { Duration } from 'luxon';
 import 'rc-slider/assets/index.css';
 
-import Icon from '@components/atoms/Icon';
+import IconButton from '@components/atoms/IconButton';
 import PlayIcon from '@assets/Icons/play_button.svg';
 import PauseIcon from '@assets/Icons/pause_button.svg';
 import NextIcon from '@assets/Icons/next_button.svg';
@@ -11,7 +11,7 @@ import PrevIcon from '@assets/Icons/previous_button.svg';
 
 import {
   Wrapper, Controls, ProgressBar, Time,
-  StyledHandle, railStyle, trackStyle, Button,
+  StyledHandle, railStyle, trackStyle,
 } from './styles';
 import { Props } from './types';
 
@@ -34,24 +34,21 @@ class PlayerControls extends React.PureComponent<Props> {
     return (
       <Wrapper>
         <Controls>
-          <Button onClick={this.props.onPrev}>
-            <Icon
-              image={PrevIcon}
-              size={15}
-            />
-          </Button>
-          <Button onClick={this.props.onPlay}>
-            <Icon
-              image={this.props.isPlaying ? PauseIcon : PlayIcon}
-              size={40}
-            />
-          </Button>
-          <Button onClick={this.props.onNext}>
-            <Icon
-              image={NextIcon}
-              size={15}
-            />
-          </Button>
+          <IconButton
+            onClick={this.props.onPrev}
+            image={PrevIcon}
+            size={15}
+          />
+          <IconButton
+            image={this.props.isPlaying ? PauseIcon : PlayIcon}
+            size={40}
+            onClick={this.props.onPlay}
+          />
+          <IconButton
+            image={NextIcon}
+            size={15}
+            onClick={this.props.onNext}
+          />
         </Controls>
         <ProgressBar>
           <Time left>{getDuration(this.props.currentTime)}</Time>

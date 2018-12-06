@@ -1,8 +1,14 @@
 import { STATUS } from '../types';
-import { DETAILS } from './actions';
+import { DETAILS, PLAYLIST } from './actions';
 
 const InitialState = {
-  details: [],
+  authorId: '',
+  authorName: '',
+  description: '',
+  id: '',
+  image: '',
+  items: [],
+  name: '',
   status: {
     isLoading: false,
     name: 'INITIAL',
@@ -17,11 +23,11 @@ const PlaylistReducer = (state = InitialState, action) => {
         status: STATUS.STARTED,
       };
     case DETAILS.SUCCEED: {
-      const { details } = action.payload;
+      const { items } = action.payload;
 
       return {
         ...state,
-        details,
+        items,
         status: STATUS.SUCCEED,
       };
     }
@@ -35,6 +41,11 @@ const PlaylistReducer = (state = InitialState, action) => {
         ...state,
         status: STATUS.FINISHED,
       };
+    case PLAYLIST.PUT:
+      return {
+        ...state,
+        ...action.details,
+      }
     default:
       return state;
   }

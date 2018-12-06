@@ -6,6 +6,16 @@ export enum DETAILS {
   FINISHED = 'SONG_DETAILS_FINISHED',
 };
 
+export enum PLAYLIST {
+  REQUEST = 'REQUEST_PLAYLIST_BY_ID',
+  PUT = 'PLAYLIST_BY_ID',
+};
+
+export const requestPlaylistById = (id: string) => ({
+  id,
+  type: PLAYLIST.REQUEST,
+});
+
 export const requestSongDetails = (ids: string | string[]) => ({
   ids,
   type: DETAILS.REQUESTED,

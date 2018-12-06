@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  background-color: ${props => props.theme.colors.primary.gray};
+  background-color: ${props => props.theme.colors.gray};
   position: fixed;
   display: grid;
   padding: 0 20px;

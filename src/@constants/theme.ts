@@ -1,9 +1,9 @@
 const theme = {
   colors: {
-    primary: {
-      black: 'rgba(0, 0, 0, 0.8)',
-      gray: '#282828',
-    },
+    black: 'rgba(0, 0, 0, 0.8)',
+    gray: '#282828',
+    primary: '#507DBC',
+    secondary: '#da8f1a',
   },
   sizes: {
     navigation: 220,

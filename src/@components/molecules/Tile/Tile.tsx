@@ -1,18 +1,55 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
-import ImageTile from '@components/atoms/ImageTile';
 
+import ImageTile from '@components/atoms/ImageTile';
+import IconButton from '@components/atoms/IconButton';
 import { setNowPlaying } from '@store/Player/actions';
+import playlist from '@assets/Icons/playlist.svg';
+import play from '@assets/Icons/play.svg';
 
 import { Props } from './types';
-import { Wrapper, PlayButton, Caption } from './styles';
+import { Wrapper, Center, Caption, StyledLink } from './styles';
 
 class Tile extends React.PureComponent<Props> {
+  static defaultProps: any = {
+    type: 'song',
+  }
+
   handleSetNowPlaying = () => {
     const { artistName = '', title = '', id } = this.props;
 
     this.props.setPlaying(id, artistName, title);
+  }
+
+  renderButton = () => {
+    switch (this.props.type) {
+      case 'song':
+        return (
+          <Center>
+            <IconButton
+              onClick={this.handleSetNowPlaying}
+              image={play}
+              size={40}
+            />
+          </Center>
+        );
+      case 'playlist':
+        return <StyledLink to={`/playlist/${this.props.id}`} />;
+      case 'add':
+        return (
+          <Center>
+            <IconButton
+              // tslint:disable-next-line:jsx-no-lambda
+              onClick={() => this.props.customOnClick(this.props.id)}
+              image={playlist}
+              size={40}
+            />
+          </Center>
+        );
+      default:
+        return null;
+    }
   }
 
   render() {
@@ -25,7 +62,7 @@ class Tile extends React.PureComponent<Props> {
           size={size}
           isRound={isRound}
         >
-          <PlayButton onClick={this.handleSetNowPlaying} />
+          {this.renderButton()}
         </ImageTile>
         {name && <Caption>{name}</Caption>}
       </Wrapper>

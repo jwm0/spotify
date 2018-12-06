@@ -30,6 +30,7 @@ class Search extends React.Component<Props> {
                     thumbnail={song.thumbnail.url}
                     primary={song.title}
                     secondary={song.artistName}
+                    type="song"
                   />
                 ))}
               </SearchResults>
@@ -40,6 +41,7 @@ class Search extends React.Component<Props> {
                     id={artist.id}
                     thumbnail={artist.thumbnail.url}
                     primary={artist.name}
+                    type="artist"
                     isRound
                   />
                 ))}
@@ -52,6 +54,7 @@ class Search extends React.Component<Props> {
                     thumbnail={playlist.thumbnail.url}
                     primary={playlist.title}
                     secondary={`by ${playlist.creatorName}`}
+                    type="playlist"
                   />
                 ))}
               </SearchResults>

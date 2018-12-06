@@ -53,7 +53,7 @@ class SongsList extends React.Component<Props> {
 }
 
 const mapStateToProps = state => ({
-  playlist: state.playlist.details,
+  playlist: state.playlist.items,
 });
 
 const mapDispatchToProps = dispatch => ({

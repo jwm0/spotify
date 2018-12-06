@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { lighten } from 'polished';
 
 export const PlaylistInfo = styled.div`
   display: flex;
@@ -8,6 +9,13 @@ export const PlaylistInfo = styled.div`
   max-width: 100%;
   padding-bottom: 20px;
   border-bottom: 1px solid hsla(0,0%,100%,.1);
+`;
+
+export const InfoWrapper = styled.div`
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const Info = styled.div`
@@ -26,11 +34,10 @@ export const SecondaryText = styled.span`
 `;
 
 export const Controls = styled.div`
-
 `;
 
 export const PlayButton = styled.button`
-  background-color: #1db954;
+  background-color: ${props => props.theme.colors.secondary};
   padding: 11px 44px;
   font-size: 11px;
   text-transform: uppercase;
@@ -50,8 +57,8 @@ export const PlayButton = styled.button`
   user-select: none;
 
   &:hover {
-    background-color: #1ed760;
-    transform: scale(1.06);
+    background-color: ${props => lighten(0.1, props.theme.colors.secondary)};
+    transform: scale(1.02);
   }
 `;
 
@@ -64,4 +71,9 @@ export const Image = styled.div<any>`
   width: 200px;
   height: 200px;
   border-radius: ${props => props.isRound && '50%'};
+`;
+
+export const Description = styled.div`
+  margin-left: 10px;
+  padding: 10px 0;
 `;

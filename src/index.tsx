@@ -2,25 +2,23 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
-import * as firebase from 'firebase';
 import { createGlobalStyle } from 'styled-components'
 import 'sanitize.css';
 
 import App from '@components/templates/App';
 import theme from '@constants/theme';
 import store from '@store/index';
-import config from '@config/firebase';
+import '@services/firebase';
 
 import registerServiceWorker from './registerServiceWorker';
 
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: #191814;
+    color: #fff;
     overscroll-behavior: none;
   }
 `;
-
-firebase.initializeApp(config);
 
 const app = (
   <Provider store={store}>
