@@ -24,4 +24,5 @@ export const Background = styled.div`
   will-change: transform;
   opacity: 1;
   transition: opacity .25s;
+  z-index: -1;
 `;

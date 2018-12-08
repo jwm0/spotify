@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { requestSearchByType } from '@store/Search/actions';
 import SongsList from '@components/organisms/SongsList';
 
 import { Props } from './types';
+import { StyledLink } from './styles';
 
 class SongResults extends React.PureComponent<Props> {
   componentDidMount() {
@@ -17,7 +17,7 @@ class SongResults extends React.PureComponent<Props> {
   render() {
     return (
       <div>
-        <Link to="/search">GO BACK</Link>
+        <StyledLink to="/search">GO BACK</StyledLink>
         <SongsList songIds={this.props.ids} />
       </div>
     )

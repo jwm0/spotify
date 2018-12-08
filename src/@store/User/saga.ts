@@ -6,13 +6,14 @@ import { PLAYLIST, USER, USER_PLAYLISTS } from './actions';
 const getUser = state => state.user;
 const getPlaylists = state => state.user.playlists;
 const authProvider = {
-  'facebook': facebookAuthProvider,
-  'google': googleAuthProvider,
+  facebook: () => facebookAuthProvider,
+  google: () => googleAuthProvider,
 };
 
 function* startLogin(action) {
   try {
-    const data = yield call(() => firebase.auth().signInWithPopup(authProvider[action.provider]));
+    const provider = authProvider[action.provider]();
+    const data = yield call(() => firebase.auth().signInWithPopup(provider));
     const information = {
       name: data.user.displayName,
       photo: data.user.photoURL,

@@ -57,7 +57,7 @@ class SongListItem extends React.PureComponent<Props> {
             size={20}
           />
           <Details>
-            <Primary>{title}</Primary>
+            <Primary active={isPlaying}>{title}</Primary>
             <Secondary>{artistName}</Secondary>
           </Details>
           <IconButton

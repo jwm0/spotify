@@ -12,10 +12,15 @@ export const Center = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  opacity: 0;
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 export const Caption = styled.span`
-
+  margin-top: 8px;
 `;
 
 export const StyledLink = styled(Link)`

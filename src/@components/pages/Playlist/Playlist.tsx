@@ -9,6 +9,7 @@ import SongsList from '@components/organisms/SongsList';
 import {
   PlaylistInfo, PrimaryText, SecondaryText,
   Controls, Info, PlayButton, InfoWrapper, Description,
+  PublicLabel, PublishButton,
 } from './styles';
 
 class Playlist extends React.Component<any> {
@@ -38,12 +39,16 @@ class Playlist extends React.Component<any> {
             <ImageTile background={playlist.image} />
             <InfoWrapper>
               <Info>
-                <PrimaryText>{playlist.name}</PrimaryText>
+                <PrimaryText>
+                  {playlist.name}
+                  <PublicLabel>{playlist.public ? 'public' : 'private'}</PublicLabel>
+                </PrimaryText>
                 <Description>
                   {playlist.description}
+                  Most popular rap songs
                 </Description>
                 <SecondaryText>By {playlist.authorName}</SecondaryText>
-                <SecondaryText>{playlist.items.length}</SecondaryText>
+                <SecondaryText>{playlist.items.length} songs</SecondaryText>
               </Info>
               <Controls>
                 <PlayButton>
@@ -51,14 +56,14 @@ class Playlist extends React.Component<any> {
                 </PlayButton>
                 {uid === playlist.authorId && playlist.public ?
                   (
-                    <PlayButton onClick={this.handleUnpublish}>
+                    <PublishButton onClick={this.handleUnpublish}>
                       Make Private
-                    </PlayButton>
+                    </PublishButton>
                   ) :
                   (
-                    <PlayButton onClick={this.handlePublish}>
+                    <PublishButton onClick={this.handlePublish}>
                       Make Public
-                    </PlayButton>
+                    </PublishButton>
                   )
                 }
               </Controls>
