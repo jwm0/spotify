@@ -1,0 +1,18 @@
+{
+  "main.css": "static/css/main.d873b578.css",
+  "main.css.map": "static/css/main.d873b578.css.map",
+  "main.js": "static/js/main.247160d2.js",
+  "main.js.map": "static/js/main.247160d2.js.map",
+  "static/media/cross.svg": "static/media/cross.6eaa9a74.svg",
+  "static/media/music.svg": "static/media/music.02767ca4.svg",
+  "static/media/next_button.svg": "static/media/next_button.3cc8919c.svg",
+  "static/media/pause_button.svg": "static/media/pause_button.5749088e.svg",
+  "static/media/play.svg": "static/media/play.046923e6.svg",
+  "static/media/play_button.svg": "static/media/play_button.cfccda6e.svg",
+  "static/media/playlist.svg": "static/media/playlist.66c25e3b.svg",
+  "static/media/previous_button.svg": "static/media/previous_button.7b327924.svg",
+  "static/media/queue.svg": "static/media/queue.680fb9e8.svg",
+  "static/media/search.svg": "static/media/search.ce65e049.svg",
+  "static/media/video.svg": "static/media/video.af8c92f7.svg",
+  "static/media/volume.svg": "static/media/volume.332ee567.svg"
+}
