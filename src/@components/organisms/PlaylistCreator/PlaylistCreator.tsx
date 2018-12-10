@@ -51,12 +51,13 @@ class PlaylistCreator extends React.PureComponent<Props> {
             name="image"
             onChange={this.handleImageSet}
           />
-          <FullWidth>
+          <FullWidth style={{ marginLeft: 30 }}>
             <Label>Description</Label>
             <Textarea
               name="description"
               value={description}
               onChange={this.handleChange}
+              placeholder="Type a short description"
             />
           </FullWidth>
         </FormWrapper>

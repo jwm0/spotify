@@ -43,10 +43,11 @@ class Playlist extends React.Component<any> {
                   {playlist.name}
                   <PublicLabel>{playlist.public ? 'public' : 'private'}</PublicLabel>
                 </PrimaryText>
-                <Description>
-                  {playlist.description}
-                  Most popular rap songs
-                </Description>
+                {playlist.description &&
+                  <Description>
+                    {playlist.description}
+                  </Description>
+                }
                 <SecondaryText>By {playlist.authorName}</SecondaryText>
                 <SecondaryText>{playlist.items.length} songs</SecondaryText>
               </Info>

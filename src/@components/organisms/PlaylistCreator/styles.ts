@@ -13,6 +13,7 @@ export const FullWidth = styled.div`
 `;
 
 export const Label = styled.label`
+  display: block;
   color: #fff;
   font-size: 14px;
   margin-bottom: 10px;
@@ -29,6 +30,9 @@ export const Input = styled.input`
 
 export const FormWrapper = styled.div`
   display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 20px;
 `;
 
 export const Textarea = styled.textarea`
@@ -36,7 +40,7 @@ export const Textarea = styled.textarea`
   border-radius: 10px;
   border: none;
   width: 100%;
-  height: 200px;
+  height: calc(100% - 26px);
   outline: none;
 `;
 
