@@ -23,13 +23,22 @@ export const StyledLink = styled(NavLink)`
   font-weight: bold;
   font-size: 22px;
   text-decoration: none;
+  margin-bottom: 10px;
+  padding: 10px 0;
+  border-radius: 10px;
+  width: 150px;
+  border-bottom: 1px solid #fff;
+  text-align: center;
+  transition: all 200ms linear;
 
   &:hover {
     color: ${props => props.theme.colors.secondary};
+    border-color: ${props => props.theme.colors.secondary};
   }
 
   &.active {
     color: ${props => props.theme.colors.secondary};
+    border-color: ${props => props.theme.colors.secondary};
   }
 `;
 
@@ -45,6 +54,8 @@ export const NewPlaylistButton = styled.button`
   color: #fff;
   transition: all 300ms linear;
   margin: 20px 0;
+  position: absolute;
+  bottom: 170px;
 
   &:hover {
     border-color: ${props => props.theme.colors.secondary};
@@ -62,6 +73,8 @@ export const LoginButton = styled.button`
   color: #fff;
   transition: all 300ms linear;
   margin: 20px 0;
+  position: absolute;
+  bottom: 115px;
 
   &:hover {
   }

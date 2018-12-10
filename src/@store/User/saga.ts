@@ -4,14 +4,16 @@ import { firebase, facebookAuthProvider, googleAuthProvider, database, storage }
 import { PLAYLIST, USER, USER_PLAYLISTS } from './actions';
 
 const getUser = state => state.user;
+const getPlaylists = state => state.user.playlists;
 const authProvider = {
-  'facebook': facebookAuthProvider,
-  'google': googleAuthProvider,
+  facebook: () => facebookAuthProvider,
+  google: () => googleAuthProvider,
 };
 
 function* startLogin(action) {
   try {
-    const data = yield call(() => firebase.auth().signInWithPopup(authProvider[action.provider]));
+    const provider = authProvider[action.provider]();
+    const data = yield call(() => firebase.auth().signInWithPopup(provider));
     const information = {
       name: data.user.displayName,
       photo: data.user.photoURL,
@@ -73,7 +75,7 @@ function* createPlaylist(action) {
     const { data: { name, description, image } } = action;
     const { uid, name: authorName } = yield select(getUser);
     const key = database.ref('playlists').push().key;
-    let imageUrl;
+    let imageUrl = '';
     if (image) {
       const snapshot = yield call(() => storage.ref(`playlists/${key}`).put(image));
       imageUrl = yield call(() => snapshot.ref.getDownloadURL());
@@ -85,6 +87,7 @@ function* createPlaylist(action) {
       description,
       image: imageUrl,
       name,
+      public: false,
       songs: [],
     };
     const metaPlaylist = {
@@ -92,6 +95,7 @@ function* createPlaylist(action) {
       id: key,
       image: imageUrl,
       name,
+      public: false,
     };
 
     let updates = {}
@@ -125,6 +129,70 @@ function* addToPlaylist(action) {
   } catch (error) {}
 }
 
+function* publishPlaylist(action) {
+  try {
+    const { playlistId, uid } = action;
+    const snapshot = yield call(() => database.ref(`users/${uid}/playlists/${playlistId}`).once('value'));
+    const metaPlaylist = snapshot.val();
+
+    if (metaPlaylist) {
+      let updates = {}
+      updates[`/playlists/${playlistId}/public`] = true;
+      updates[`/users/${uid}/playlists/${playlistId}/public`] = true;
+      updates[`/public/playlists/${playlistId}`] = metaPlaylist;
+
+      yield call(() => database.ref().update(updates));
+
+      const playlists = yield select(getPlaylists);
+      const newPlaylists = playlists.map((object) => {
+        return object.id === playlistId ?
+          {
+            ...object,
+            public: true,
+          } :
+          object;
+      });
+
+      yield put ({
+        playlists: newPlaylists,
+        type: PLAYLIST.PUBLISH,
+      });
+    }
+  } catch(e) {}
+}
+
+function* unpublishPlaylist(action) {
+  try {
+    const { playlistId, uid } = action;
+    const snapshot = yield call(() => database.ref(`/playlists/${playlistId}`).once('value'));
+    const isPublic = snapshot.val().public;
+
+    if (isPublic) {
+      let updates = {}
+      updates[`/playlists/${playlistId}/public`] = false;
+      updates[`/users/${uid}/playlists/${playlistId}/public`] = false;
+      updates[`/public/playlists/${playlistId}`] = null;
+
+      yield call(() => database.ref().update(updates));
+
+      const playlists = yield select(getPlaylists);
+      const newPlaylists = playlists.map((object) => {
+        return object.id === playlistId ?
+          {
+            ...object,
+            public: false,
+          } :
+          object;
+      });
+
+      yield put ({
+        playlists: newPlaylists,
+        type: PLAYLIST.UNPUBLISH,
+      });
+    }
+  } catch(e) {}
+}
+
 
 export default function* userSaga() {
   yield all([
@@ -135,5 +203,7 @@ export default function* userSaga() {
     takeLatest(USER.START_LOGIN as any, login),
     takeLatest(USER.REQUEST_LOGOUT as any, startLogout),
     takeLatest(USER_PLAYLISTS.REQUESTED as any, getUserPlaylists),
+    takeLatest(PLAYLIST.REQUEST_PUBLISH as any, publishPlaylist),
+    takeLatest(PLAYLIST.REQUEST_UNPUBLISH as any, unpublishPlaylist),
   ]);
 }

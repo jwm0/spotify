@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Navigation from '@components/organisms/Navigation';
 import Content from '@components/templates/Content';
 import Playbar from '@components/organisms/Playbar';
+import Gradient from '@components/templates/Gradient';
 
 // routes
 import Main from '@components/pages/Main';
@@ -18,7 +19,7 @@ import { Wrapper } from './styles';
 const AppRouter = () => (
   <Router>
     <Wrapper>
-      {/* <Background /> */}
+      <Gradient />
       <Navigation />
       <Playbar />
       <Content>

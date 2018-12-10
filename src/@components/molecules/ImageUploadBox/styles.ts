@@ -32,9 +32,9 @@ export const ButtonCross = styled.button`
 
 export const ButtonReplace = styled.label<any>`
   display: ${props => props.disabled ? 'none' : 'block'};
-  border: 2px solid blue;
+  border: 2px solid grey;
   border-radius: 2rem;
-  color: blue;
+  color: grey;
   cursor: pointer;
   padding: 5px 10px;
   position: absolute;
@@ -54,9 +54,10 @@ export const CenterText = styled.span`
 
 export const Image = styled.img<any>`
   opacity: ${props => props.loading ? '0.3' : '1'};
-  max-width:100%;
-  max-height:100%;
+  width: 100%;
+  height: 100%;
   transition: all 200ms ease;
+  object-fit: cover;
 `;
 
 export const ImageWrapper = styled.div`
@@ -65,7 +66,7 @@ export const ImageWrapper = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
-  background-color: #fff;
+  background-color: none;
 
   &:hover {
     ${ButtonCross} {
@@ -83,16 +84,16 @@ export const ImageWrapper = styled.div`
 export const FileButton = styled.label<any>`
   align-self: center;
   padding: 5px 10px;
-  border: 2px solid ${props => props.disabled ? 'grey' : 'blue'};
+  border: 2px solid ${props => props.disabled ? 'grey' : 'grey'};
   border-radius: 2rem;
-  color: ${props => props.disabled ? 'grey' : 'blue'};
+  color: ${props => props.disabled ? 'grey' : 'grey'};
   cursor: ${props => props.disabled ? 'default' : 'pointer'};
   transition: all 200ms ease;
   user-select: none;
 
   &:hover {
     ${props => !props.disabled && `
-        background-color: blue;
+        background-color: grey;
         color: white;
     `}
   }

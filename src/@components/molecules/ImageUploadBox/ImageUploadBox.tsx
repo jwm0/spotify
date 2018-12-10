@@ -118,7 +118,6 @@ class ImageUploadBox extends React.Component<Props, State>{
               </FileButton>
               {loading && <span>uploading...</span>}
               {error && <ErrorMessage>Image upload failed, please try again</ErrorMessage>}
-              <span>Supported file types: {formats.join(', ')}</span>
             </UploadWrapper>
           )
         }

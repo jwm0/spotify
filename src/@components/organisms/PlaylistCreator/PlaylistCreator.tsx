@@ -31,6 +31,7 @@ class PlaylistCreator extends React.PureComponent<Props> {
   handleSubmit = () => {
     const { name, image, description } = this.state;
     this.props.createPlaylist({ name, image, description });
+    this.props.handleClose();
   }
 
   render() {
@@ -51,12 +52,13 @@ class PlaylistCreator extends React.PureComponent<Props> {
             name="image"
             onChange={this.handleImageSet}
           />
-          <FullWidth>
+          <FullWidth style={{ marginLeft: 30 }}>
             <Label>Description</Label>
             <Textarea
               name="description"
               value={description}
               onChange={this.handleChange}
+              placeholder="Type a short description"
             />
           </FullWidth>
         </FormWrapper>

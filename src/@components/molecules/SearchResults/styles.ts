@@ -11,6 +11,7 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  padding-bottom: 5px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   margin: 20px 0;
 `;

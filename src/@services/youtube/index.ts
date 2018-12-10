@@ -21,3 +21,13 @@ export const Details = {
     }});
   }
 };
+
+export const Songs = {
+  listMostPopular: (region?, results?) => get('videos/', { params: {
+    chart: 'mostPopular',
+    maxResults: results,
+    part: 'snippet,contentDetails,statistics',
+    regionCode: region,
+    videoCategoryId: Category.MUSIC,
+  }}),
+}
