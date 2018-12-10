@@ -31,6 +31,7 @@ class PlaylistCreator extends React.PureComponent<Props> {
   handleSubmit = () => {
     const { name, image, description } = this.state;
     this.props.createPlaylist({ name, image, description });
+    this.props.handleClose();
   }
 
   render() {

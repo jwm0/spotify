@@ -59,7 +59,7 @@ class Navigation extends React.Component<Props> {
             isOpen={true}
             onClose={this.handleCloseLoginModal}
           >
-            <Login />
+            <Login handleClose={this.handleCloseLoginModal} />
           </Modal>
         }
         {this.state.isNewPlaylistOpen &&
@@ -67,7 +67,7 @@ class Navigation extends React.Component<Props> {
             isOpen={true}
             onClose={this.handleClosePlaylistModal}
           >
-            <PlaylistCreator />
+            <PlaylistCreator handleClose={this.handleClosePlaylistModal} />
           </Modal>
         }
       </>

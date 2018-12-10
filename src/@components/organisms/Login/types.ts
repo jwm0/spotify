@@ -5,5 +5,6 @@ export enum PROVIDER {
 
 export type Props = {
   loginWith: (provider: PROVIDER) => void,
-  logout: () => void,
+  handleClose: () => void,
+  isLoggedIn: boolean,
 };

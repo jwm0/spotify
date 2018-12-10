@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { requestLogin, requestLogout } from '@store/User/actions';
+import { requestLogin } from '@store/User/actions';
 
 import { PROVIDER, Props } from './types';
 import { Wrapper, LoginButton, Header } from './styles';
@@ -9,6 +9,12 @@ import { Wrapper, LoginButton, Header } from './styles';
 class Login extends React.PureComponent<Props> {
   handleLogin = (provider: PROVIDER) => () => {
     this.props.loginWith(provider);
+  }
+
+  componentDidUpdate() {
+    if (this.props.isLoggedIn) {
+      this.props.handleClose();
+    }
   }
 
   render() {
@@ -34,9 +40,12 @@ class Login extends React.PureComponent<Props> {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  loginWith: (provider: PROVIDER) => dispatch(requestLogin(provider)),
-  logout: () => dispatch(requestLogout),
+const mapStateToProps = state => ({
+  isLoggedIn: !!state.user.uid,
 });
 
-export default connect(null, mapDispatchToProps)(Login);
+const mapDispatchToProps = dispatch => ({
+  loginWith: (provider: PROVIDER) => dispatch(requestLogin(provider)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
