@@ -113,10 +113,9 @@ function* createPlaylist(action) {
 function* addToPlaylist(action) {
   try {
     const { playlistId, songId } = action;
-    console.log(playlistId, songId);
-    const key = database.ref(`playlists/${playlistId}/songs`).push().key;
+    const timestamp = new Date();
     let updates = {}
-    updates[`/playlists/${playlistId}/songs/${key}`] = songId;
+    updates[`/playlists/${playlistId}/songs/${songId}`] = timestamp;
     // updates[`/users/${uid}/playlists/${key}`] = metaPlaylist;
 
     yield call(() => database.ref().update(updates));

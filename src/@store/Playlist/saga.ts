@@ -1,6 +1,6 @@
 import { all, takeLatest, put, call } from 'redux-saga/effects';
 import { database } from '@services/firebase';
-import { get } from 'lodash';
+import { get, sortBy } from 'lodash';
 
 import { Details } from '@services/youtube';
 import { getArtist } from '@utils/youtube';
@@ -43,7 +43,10 @@ function* fetchPlaylistById(action) {
   try {
     const snapshot = yield call(() => database.ref(`playlists/${action.id}`).once('value'));
     const { songs = {}, ...details } = snapshot.val();
-    const items = Object.keys(songs).map(key => songs[key]);
+    const items = sortBy(Object.keys(songs).map(id => ({
+      id,
+      timestamp: songs[id],
+    })), 'timestamp').map((s) => s.id);
 
     yield put({
       details,
